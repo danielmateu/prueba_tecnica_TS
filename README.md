@@ -4,8 +4,8 @@ The objective of this tech test is to create a similar app to the one provided i
 
 Here are the steps to follow:
 
-- [] Fetch 100 rows of data using the API
-- [] Display the data in a table format, similar to the example
+- [x] Fetch 100 rows of data using the API
+- [x] Display the data in a table format, similar to the example
 - [] Provide the option to color rows
 - [] Allow the data to be sorted by country
 - [] Enable the ability to delete a row as shown
