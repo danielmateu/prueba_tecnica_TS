@@ -1,6 +1,6 @@
 # Prueba
 
-The objective of this tech test is to create a similar app to the one provided in this link... no link but ok. TO achive this you must use the API provided by https://renandomuser.me
+The objective of this tech test is to create a similar app to the one provided in this link... no link but ok. TO achive this you must use the API provided by https://randomuser.me
 
 Here are the steps to follow:
 
