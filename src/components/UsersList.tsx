@@ -2,9 +2,13 @@ import { User } from "../types"
 
 interface Props {
     users: User[]
+    showColors: boolean
 }
 
-export const UsersList = ({ users }: Props) => {
+export const UsersList = ({ users, showColors }: Props) => {
+
+
+
     return (
         <table>
             <thead>
@@ -17,15 +21,28 @@ export const UsersList = ({ users }: Props) => {
                 </tr>
             </thead>
             <tbody>
-                {users.map((user) => (
-                    <tr key={user.login.uuid}>
-                        <td><img src={user.picture.thumbnail} alt="" /></td>
-                        <td>{user.name.first}</td>
-                        <td>{user.name.last}</td>
-                        <td>{user.location.country}</td>
-                        <td><button>Borrar</button></td>
-                    </tr>
-                ))}
+                {
+                    users.map((user, index) => {
+                        const backgroundColor = index % 2 === 0 ? '#333' : '#666'
+                        const color = showColors ? backgroundColor : 'transparent'
+                        return (
+                            (
+                                // Aplicar el estilo de fondo de color si showColors es true
+                                <tr key={user.login.uuid}
+                                    style={{ backgroundColor: color }}
+                                >
+                                    {/* <tr key={user.login.uuid}> */}
+                                    <td><img src={user.picture.thumbnail} alt="" /></td>
+                                    <td>{user.name.first}</td>
+                                    <td>{user.name.last}</td>
+                                    <td>{user.location.country}</td>
+                                    <td><button>Borrar</button></td>
+                                </tr>
+                            )
+                        )
+                    }
+                    )
+                }
             </tbody>
         </table>
 
