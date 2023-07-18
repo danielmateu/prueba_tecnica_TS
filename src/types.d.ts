@@ -20,6 +20,13 @@
  * Within Postman, for this request to successfully authenticate, running the previous
  * request "DigestAuth Request" stores the relevant information within the global variables.
  */
+
+declare module "types" {
+    interface Array<T> {
+        toSorted(compareFN?: (a: T, b: T) => number): T[];
+    }
+}
+
 export interface DigestAuthSuccess {
     results: User[];
     info: DigestAuthSuccessInfo;

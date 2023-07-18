@@ -1,4 +1,5 @@
 import { User } from "../types"
+import { useState } from 'react';
 
 interface Props {
     users: User[]
@@ -6,6 +7,8 @@ interface Props {
 }
 
 export const UsersList = ({ users, showColors }: Props) => {
+
+
 
 
 
@@ -29,8 +32,7 @@ export const UsersList = ({ users, showColors }: Props) => {
                             (
                                 // Aplicar el estilo de fondo de color si showColors es true
                                 <tr key={user.login.uuid}
-                                    style={{ backgroundColor: color }}
-                                >
+                                    style={{ backgroundColor: color }}>
                                     {/* <tr key={user.login.uuid}> */}
                                     <td><img src={user.picture.thumbnail} alt="" /></td>
                                     <td>{user.name.first}</td>
