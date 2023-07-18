@@ -3,10 +3,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { User } from './types';
+import { SortBy, type User } from './types.d';
 import { UsersList } from './components/UsersList';
 import './App.css'
-
 
 function App() {
   // Fetch data from API
@@ -22,18 +21,22 @@ function App() {
       .catch(err => console.log(err))
   }, [])
 
-  const originalUsers = useRef<User[]>([])
   const [users, setUSers] = useState<User[]>([])
   const [showColors, setShowColors] = useState(false)
-  const [sortByCountry, setSortByCountry] = useState(false)
+  // const [sortByCountry, setSortByCountry] = useState(false)
+  const [sorting, setSorting] = useState<SortBy>(SortBy.NONE)
   const [filterCountry, setFilterCountry] = useState<string | null>(null)
-  // Implement a feature that allow us to restore the initial state, meaning that all deleted rows will be recovered with useRef
+
+  const originalUsers = useRef<User[]>([])
 
   const toggleColors = () => {
     setShowColors(!showColors)
   }
 
-  const toggleSortByCountry = () => { setSortByCountry(!sortByCountry) }
+  const toggleSortByCountry = () => {
+    const newSortingValue = sorting === SortBy.NONE ? SortBy.COUNTRY : SortBy.NONE
+    setSorting(newSortingValue)
+  }
 
   const handleDeleteRow = (id: string) => {
     const filteredUsers = users.filter(user => user.login.uuid !== id)
@@ -43,6 +46,12 @@ function App() {
 
   const handleReset = () => {
     setUSers(originalUsers.current)
+  }
+
+  const handleChangeSort = (sort: SortBy) => {
+    return () => {
+      setSorting(sort)
+    }
   }
 
   // Filtrar usuarios por país
@@ -58,8 +67,13 @@ function App() {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const sortedUsers = useMemo(() => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    return sortByCountry ? users.toSorted((a, b) => a.location.country.localeCompare(b.location.country)) : filteredUsers
-  }, [filteredUsers, sortByCountry])
+    if (sorting === SortBy.NONE) return filteredUsers
+    if (sorting === SortBy.NAME) return users.toSorted((a, b) => a.name.first.localeCompare(b.name.first))
+    if (sorting === SortBy.LAST) return users.toSorted((a, b) => a.name.last.localeCompare(b.name.last))
+    if (sorting === SortBy.COUNTRY) return users.toSorted((a, b) => a.location.country.localeCompare(b.location.country))
+
+    // return sorting === SortBy.COUNTRY ? users.toSorted((a, b) => a.location.country.localeCompare(b.location.country)) : filteredUsers
+  }, [filteredUsers, sorting])
 
   return (
     <>
@@ -68,7 +82,7 @@ function App() {
         <button onClick={toggleColors}>Colorea Filas</button>
         <button onClick={toggleSortByCountry}>
           {
-            sortByCountry ? 'No ordenar por país' : 'Ordenar por país'
+            sorting === SortBy.COUNTRY ? 'No ordenar por país' : 'Ordenar por país'
           }
 
         </button>
@@ -86,6 +100,7 @@ function App() {
           users={sortedUsers}
           showColors={showColors}
           deleteUser={handleDeleteRow}
+          changeSorting={handleChangeSort}
         />
       </main>
     </>

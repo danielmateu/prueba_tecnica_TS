@@ -57,3 +57,7 @@ header {
   gap: 1em;
   color: white;
 }
+
+.pointer {
+  cursor: pointer;
+}
