@@ -1,16 +1,13 @@
 import { User } from "../types"
-import { useState } from 'react';
+
 
 interface Props {
     users: User[]
     showColors: boolean
+    deleteUser: (id: string) => void
 }
 
-export const UsersList = ({ users, showColors }: Props) => {
-
-
-
-
+export const UsersList = ({ users, showColors, deleteUser }: Props) => {
 
     return (
         <table>
@@ -38,7 +35,7 @@ export const UsersList = ({ users, showColors }: Props) => {
                                     <td>{user.name.first}</td>
                                     <td>{user.name.last}</td>
                                     <td>{user.location.country}</td>
-                                    <td><button>Borrar</button></td>
+                                    <td><button onClick={() => deleteUser(user.login.uuid)}>Borrar</button></td>
                                 </tr>
                             )
                         )

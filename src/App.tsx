@@ -29,7 +29,6 @@ function App() {
   }
 
   const toggleSortByCountry = () => { setSortByCountry(!sortByCountry) }
-
   // Ordenar usuarios sin mutar el estado
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const sortedUsers = sortByCountry
@@ -41,6 +40,10 @@ function App() {
     : users
 
 
+  const handleDeleteRow = (id: string) => {
+    const filteredUsers = users.filter(user => user.login.uuid !== id)
+    setUSers(filteredUsers)
+  }
 
 
   return (
@@ -60,6 +63,7 @@ function App() {
         <UsersList
           users={sortedUsers}
           showColors={showColors}
+          deleteUser={handleDeleteRow}
         />
       </main>
     </>

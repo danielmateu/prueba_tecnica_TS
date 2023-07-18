@@ -1,27 +1,7 @@
-// Postman Echo is service you can use to test your REST clients and make sample API calls.
-// It provides endpoints for `GET`, `POST`, `PUT`, various auth mechanisms and other utility
-// endpoints.
-//
-// The documentation for the endpoints as well as example responses can be found at
-// [https://postman-echo.com](https://postman-echo.com/?source=echo-collection-app-onboarding)
 
-/**
- * DigestAuth Success
- *
- * GET https://postman-echo.com/digest-auth
- *
- * This endpoint sends a hashed Digest Authorization header to gain access to a valid `200
- * Ok` response code. In Postman, it uses the stored [global
- *
- * variables](https://www.getpostman.com/docs/environments#gloval-variables?source=echo-collection-app-onboarding),
- * `echo_digest_realm` and `echo_digest_nonce`, to generate the hashed authorisation
- * header.
- *
- * Within Postman, for this request to successfully authenticate, running the previous
- * request "DigestAuth Request" stores the relevant information within the global variables.
- */
-
-declare module "types" {
+/* The `declare global` block is used to extend the global scope in TypeScript. In this case, it is
+extending the `Array` interface to include a new method called `toSorted`. */
+declare global {
     interface Array<T> {
         toSorted(compareFN?: (a: T, b: T) => number): T[];
     }
@@ -126,35 +106,6 @@ export interface Picture {
     thumbnail: string;
 }
 
-/**
- * Basic Auth
- *
- * GET https://postman-echo.com/basic-auth
- *
- * This endpoint simulates a **basic-auth** protected endpoint.
- * The endpoint accepts a default username and password and returns a status code of `200
- * ok` only if the same is provided.
- * Otherwise it will return a status code `401 unauthorized`.
- *
- * > Username: `postman`
- * >
- * > Password: `password`
- *
- * To use this endpoint, send a request with the header `Authorization: Basic
- * cG9zdG1hbjpwYXNzd29yZA==`.
- * The cryptic latter half of the header value is a base64 encoded concatenation of the
- * default username and password.
- * Using Postman, to send this request, you can simply fill in the username and password in
- * the "Authorization" tab and Postman will do the rest for you.
- *
- * To know more about basic authentication, refer to the [Basic Access
- * Authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) wikipedia
- * article.
- * The article on [authentication
- *
- * helpers](https://www.getpostman.com/docs/helpers#basic-auth?source=echo-collection-app-onboarding)
- * elaborates how to use the same within the Postman app.
- */
 export interface BasicAuth {
     authenticated: boolean;
 }
