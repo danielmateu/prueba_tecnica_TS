@@ -8,10 +8,10 @@ Here are the steps to follow:
 - [x] Display the data in a table format, similar to the example
 - [x] Provide the option to color rows
 - [x] Allow the data to be sorted by country
-- [] Enable the ability to delete a row as shown
-- [] Implement a feature that allowas the user to restore the initial state, meaning that all deleted rows will be recovered
-- [] Handly any potential errors that may occur
-- [] Implement a feature that allowas the user to filter the data by country
+- [x] Enable the ability to delete a row as shown
+- [x] Implement a feature that allowas the user to restore the initial state, meaning that all deleted rows will be recovered
+- [x] Handly any potential errors that may occur
+- [] Implement a feature that allow us to filter the data by country
 - [] Avoid sorting uses again the data when the user is changing filter by country
 - [] Sort by clicking on the column header
 - [] Provide a Readme.mb file with instruction on how to run the app
